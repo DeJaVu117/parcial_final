@@ -1,0 +1,61 @@
+{% block content %} 
+<style>
+    .titulo{
+        color: blue;
+        text-align: center;
+       }
+      
+       #btnEntrarSalir{
+       
+        margin-left: 94%;
+        color: white;
+        background-color: blue;
+        border-radius: 5px;
+       }
+       #btnNuevaNota{
+        background-color: blue;
+        text-align: left;
+        border-radius: 5px;
+        color: white;
+       }
+       thead{
+        background-color: lightblue;
+       }
+      
+      
+    </style>
+    <body>
+        <h1 class="titulo">App de Notas</h1>
+    <div id="caja">
+       {% if user.is_authenticated %}
+        <div id="boton1"><a id="btnEntrarSalir"  href="{% url 'logout' %}">Salir</a>
+        {% else %}
+        <a id="btnEntrarSalir" href="{% url 'login' %}">Ingresar</a></div>
+        <br>
+        {% endif %}
+{% load static %}
+
+{% block extrahead %} 
+<title>editarNota</title>
+{% endblock extrahead%}
+
+
+<h1 class="display-3" id="title">Editar Nota</h1>
+<p>Edite los datos de la nota</p>
+<div class="container formulario">
+    <form method="POST" enctype="multipart/form-data">
+ 
+        <!-- Security token -->
+        {% csrf_token %}
+     
+        <!-- Using the formset -->
+        <table class="table">
+            {{ form.as_table }}
+        </table>
+         
+        <input type="submit" value="Guardar" class="btn btn-success">
+        <a type="button" class="btn btn-danger" href="{% url 'gestionNota' %}">Cancelar</a>
+    </form>   
+</div>
+
+{% endblock content%}

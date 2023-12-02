@@ -1,0 +1,69 @@
+{% block content %} 
+<style>
+  .titulo{
+      color: blue;
+      text-align: center;
+     }
+    
+     #btnEntrarSalir{
+     
+      margin-left: 94%;
+      color: white;
+      background-color: blue;
+      border-radius: 5px;
+     }
+     #btnNuevaNota{
+      background-color: blue;
+      text-align: left;
+      border-radius: 5px;
+      color: white;
+     }
+     thead{
+      background-color: lightblue;
+     }
+    
+    
+  </style>
+  <body>
+      <h1 class="titulo">App de Notas</h1>
+  <div id="caja">
+     {% if user.is_authenticated %}
+      <div id="boton1"><a id="btnEntrarSalir"  href="{% url 'logout' %}">Salir</a>
+      {% else %}
+      <a id="btnEntrarSalir" href="{% url 'login' %}">Ingresar</a></div>
+      <br>
+      {% endif %}
+{% load static %}
+
+{% block extrahead %} 
+<title>Detalle</title>
+{% endblock extrahead%}
+
+
+<h1 class="display-4" id="title">Detalle de la Nota</h1>
+<a type="button" class="btn btn-success" href="{% url 'index.html' %}">Volver</a>
+
+<div class="row">
+    <div class="col col-sm">
+        <table class="table">
+            <tbody>
+              <tr>
+                    <th scope="row">ID</th>
+                    <td>{{ Nota.id }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Titulo</th>
+                <td>{{ Nota.titulo }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Nota</th>
+                <td>{{ Nota.nota }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+    </div>
+
+</div>
+
+{% endblock content%}

@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<!--EJEMPLO ADAPTADO DE https://www.w3schools.com/howto/howto_css_login_form.asp -->
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    .contenedor{
+     text-align: center;
+     color:blue;
+     background-color:lightgrey;
+     margin-left:500px;
+     margin-right:500px;
+
+    }
+    button{
+     background-color: blue;
+     color:white
+
+    }
+    .container{
+     color: black;
+
+
+    }
+     </style>
+     
+</head>
+<body>
+ <div class="contenedor">
+     <h2>Ingreso</h2>
+     <h5>(App de notas)</h5>
+     <form action="{% url 'login' %}" method="post"> 
+     {% csrf_token %}
+     <div class="container">
+         {% if form.errors %}
+         <p>Nombre de Usuario o Contraseña Incorrectos.</p>
+         {% endif %}
+ 
+         {% if next %}
+             {% if user.is_authenticated %}
+             <p>Tu cuenta no tiene acceso a esta página, si tienes otra cuenta por favor
+                 ingresa tus credenciales.</p>
+             {% else %}
+             <p>Por favor, ingresar credenciales para ver la página.</p>
+             {% endif %}
+         {% endif %}
+ 
+         <label for="uname"><b> Usuario</b></label>
+         {{ form.username }}
+        <br>
+         <label for="psw"><b>Contraseña</b></label>
+         {{ form.password }}
+        <br>
+         <button type="submit">Ingresar</button>
+         <label>
+            <input type="checkbox" checked="checked" name="remember"> Recuerdame
+            <p>No tienes cuenta? <a href="{% url 'registro' %}">Registrarse</a></p>
+            </label>
+     </div>
+ 
+     </form>
+ </div>
+</body>
+</html>

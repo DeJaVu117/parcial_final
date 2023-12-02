@@ -1,0 +1,54 @@
+{% block content %} 
+<style>
+.titulo{
+    color: blue;
+    text-align: center;
+   }
+  
+   #btnEntrarSalir{
+   
+    margin-left: 94%;
+    color: white;
+    background-color: blue;
+    border-radius: 5px;
+   }
+   #btnNuevaNota{
+    background-color: blue;
+    text-align: left;
+    border-radius: 5px;
+    color: white;
+   }
+   thead{
+    background-color: lightblue;
+   }
+  
+  
+</style>
+<body>
+    <h1 class="titulo">App de Notas</h1>
+<div id="caja">
+   {% if user.is_authenticated %}
+    <div id="boton1"><a id="btnEntrarSalir"  href="{% url 'logout' %}">Salir</a>
+    {% else %}
+    <a id="btnEntrarSalir" href="{% url 'login' %}">Ingresar</a></div>
+    <br>
+    {% endif %}
+{% load static %}
+
+{% block extrahead %} 
+<title>Borrar Nota</title>
+{% endblock extrahead%}
+
+
+<h1 class="display-3" id="title">Borrar Nota</h1>
+<p>Elimine la nota</p>
+<form method="POST">
+    <!-- Security token by Django -->
+    {% csrf_token %}
+    Esta seguro de eliminar esta nota?
+    <input type="submit" value="Si"  class="btn btn-success"  />
+    <a href="{% url 'gestionNota' %}"  class="btn btn-danger" >Cancel </a>
+</form> 
+
+
+{% endblock content%}
